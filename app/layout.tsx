@@ -14,10 +14,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex">
-        <nav className="w-40 h-screen bg-slate-700 flex flex-col justify-start gap-4 p-8 text-white text-lg">
-          <Link href={"/sphere"}>sphere</Link>
+        {/* 사이드바 */}
+        <nav className="fixed h-screen p-8 text-lg text-white bg-slate-700">
+          <ul className="flex flex-col justify-start gap-4 overflow-scroll">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/sphere">Sphere</Link>
+            </li>
+          </ul>
         </nav>
-        <main className="p-8">{children}</main>
+
+        {/* 메인 영역 */}
+        <main>{children}</main>
       </body>
     </html>
   );
