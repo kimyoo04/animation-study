@@ -1,5 +1,5 @@
 {
-  "name": "three-js-study",
+  "name": "animation-study",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,9 +14,12 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "framer-motion": "^10.10.0",
+    "gsap": "^3.11.5",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "three": "^0.151.3",
     "typescript": "5.0.3"
   },
   "devDependencies": {
