@@ -1,5 +1,6 @@
 import Link from "next/link";
 import "./globals.css";
+import Fonts from "@/src/components/Fonts";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,23 +13,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="flex">
-        {/* 사이드바 */}
-        <nav className="fixed h-screen p-8 text-lg text-white ">
-          <ul className="flex flex-col justify-start gap-4 overflow-scroll">
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/sphere">Sphere</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* 메인 영역 */}
-        <main>{children}</main>
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <body className="flex">
+          <Fonts>
+            {/* 사이드바 */}
+            <nav className="fixed h-screen p-8 text-lg text-white ">
+              <ul className="flex flex-col justify-start gap-4 overflow-scroll">
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/sphere">Sphere</Link>
+                </li>
+              </ul>
+            </nav>
+            {/* 메인 영역 */}
+            {children}
+          </Fonts>
+        </body>
+      </html>
+    </>
   );
 }
