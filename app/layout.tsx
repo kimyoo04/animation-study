@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex">
         {/* 사이드바 */}
-        <nav className="fixed h-screen p-8 text-lg text-white bg-slate-700">
+        <nav className="fixed h-screen p-8 text-lg text-white ">
           <ul className="flex flex-col justify-start gap-4 overflow-scroll">
             <li>
               <Link href="/">Home</Link>

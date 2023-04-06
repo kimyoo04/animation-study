@@ -2,6 +2,7 @@
 
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 export default function Sphere(): JSX.Element {
   const sphereRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,8 @@ export default function Sphere(): JSX.Element {
     const geometry = new THREE.SphereGeometry(1, 64, 64); // 반지름, 폭세그먼트 수, 높이세그먼트 수
     const material = new THREE.MeshStandardMaterial({ color: "#d3de0b" });
     const Mesh = new THREE.Mesh(geometry, material);
+
+    renderer.setPixelRatio(2);
 
     camera.position.z = 4; // 카메라 깊이
     light.position.set(0, 10, 10); // x, y, z
@@ -39,8 +42,20 @@ export default function Sphere(): JSX.Element {
     window.addEventListener("resize", handleResize);
     sphereRef.current?.appendChild(renderer.domElement); // div 태그에 할당
 
+    let controls: OrbitControls;
+
+    if (sphereRef.current !== null) {
+      controls = new OrbitControls(camera, sphereRef.current);
+      controls.enableDamping = true;
+      controls.enablePan = false;
+      controls.enableZoom = false;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 5;
+    }
+
     // 애니메이션 루프를 생성
     function animate() {
+      controls && controls.update();
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
     }
