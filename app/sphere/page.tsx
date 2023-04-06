@@ -3,6 +3,7 @@
 import * as THREE from "three";
 import { useEffect, useRef } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { gsap } from "gsap";
 
 export default function Sphere(): JSX.Element {
   const sphereRef = useRef<HTMLDivElement>(null);
@@ -19,7 +20,7 @@ export default function Sphere(): JSX.Element {
     const light = new THREE.PointLight(0xffffff, 1, 100);
     const geometry = new THREE.SphereGeometry(1, 64, 64); // 반지름, 폭세그먼트 수, 높이세그먼트 수
     const material = new THREE.MeshStandardMaterial({ color: "#d3de0b" });
-    const Mesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, material);
 
     renderer.setPixelRatio(2);
 
@@ -28,7 +29,7 @@ export default function Sphere(): JSX.Element {
 
     scene.add(camera);
     scene.add(light);
-    scene.add(Mesh);
+    scene.add(mesh);
 
     function handleResize() {
       const width = window.innerWidth;
@@ -43,7 +44,6 @@ export default function Sphere(): JSX.Element {
     sphereRef.current?.appendChild(renderer.domElement); // div 태그에 할당
 
     let controls: OrbitControls;
-
     if (sphereRef.current !== null) {
       controls = new OrbitControls(camera, sphereRef.current);
       controls.enableDamping = true;
@@ -53,13 +53,17 @@ export default function Sphere(): JSX.Element {
       controls.autoRotateSpeed = 5;
     }
 
-    // 애니메이션 루프를 생성
+    // 애니메이션 루프 생성
     function animate() {
       controls && controls.update();
       requestAnimationFrame(animate);
       renderer.render(scene, camera);
     }
     animate();
+
+    // gsap fromTo 설정
+    const tl = gsap.timeline({ defaults: { duration: 1 } });
+    tl.fromTo(mesh.scale, { z: 0, x: 0, y: 0 }, { z: 1, x: 1, y: 1 });
 
     // 컴포넌트 언마운트 시 이벤트 제거
     return () => window.removeEventListener("resize", handleResize);
