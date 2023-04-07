@@ -1,35 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export default function SideBar() {
-  const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const app = useRef<HTMLDivElement>(null);
+  const tl = useRef<GSAPTimeline>();
 
-  // gsap sidebar 애니메이션
-  useEffect(() => {
-    if (!tweenRef.current) {
-      tweenRef.current = gsap.to(".nav", {
-        duration: 0.5,
-        x: 30,
-        ease: "power2.inOut",
-      });
-    } else {
-      tweenRef.current.restart();
-    }
-  }, []);
+  // 클릭시 애니메이션 실행
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    gsap.to(e.target, { rotation: "50", yoyo: true, repeat: 1 });
+  };
+
+  useLayoutEffect(() => {
+    // context는 wrapper 역할
+    let ctx = gsap.context(() => {
+      tl.current = gsap
+        .timeline() // 순서대로 1개씩 애니메이션 실행
+        .fromTo(".nav", { x: -200 }, { opacity: 1, x: 0 }); // 해당 클래스에 애니메이션 설정
+    }, app);
+
+    return () => ctx.revert();
+  }, [app]);
 
   return (
-    <nav className="fixed h-screen p-8 text-lg nav">
-      <ul className="flex flex-col justify-start gap-4 overflow-scroll">
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/sphere">Sphere</Link>
-        </li>
-      </ul>
-    </nav>
+    <div ref={app} className="z-10 ">
+      <nav className="fixed top-0 left-0 h-screen p-8 text-lg opacity-0 nav">
+        <ul className="flex flex-col justify-start gap-4 overflow-scroll">
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/sphere">Sphere</Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 }

@@ -4,4 +4,6 @@
 
 # gsap study
 
+- https://github.com/vercel/next.js/tree/canary/examples/with-gsap
+
 # framer-motion study
