@@ -1,6 +1,6 @@
-import Link from "next/link";
 import "./globals.css";
 import Fonts from "@/src/components/Fonts";
+import SideBar from "@/src/components/SideBar";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,19 +15,11 @@ export default function RootLayout({
   return (
     <>
       <html lang="en">
-        <body className="flex">
+        <body className="flex text-white bg-black">
           <Fonts>
             {/* 사이드바 */}
-            <nav className="fixed h-screen p-8 text-lg text-white ">
-              <ul className="flex flex-col justify-start gap-4 overflow-scroll">
-                <li>
-                  <Link href="/">Home</Link>
-                </li>
-                <li>
-                  <Link href="/sphere">Sphere</Link>
-                </li>
-              </ul>
-            </nav>
+            <SideBar />
+
             {/* 메인 영역 */}
             {children}
           </Fonts>
