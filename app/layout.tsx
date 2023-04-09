@@ -13,18 +13,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <html lang="en">
-        <body className="flex text-white bg-black">
-          <Fonts>
-            {/* 사이드바 */}
-            <SideBar />
+    <html lang="en">
+      <body className="flex text-white bg-gray-800">
+        <Fonts>
+          {/* 메인 영역 */}
+          {children}
 
-            {/* 메인 영역 */}
-            {children}
-          </Fonts>
-        </body>
-      </html>
-    </>
+          {/* 사이드바 */}
+          <SideBar />
+        </Fonts>
+      </body>
+    </html>
   );
 }
