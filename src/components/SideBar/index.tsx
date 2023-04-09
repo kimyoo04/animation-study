@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export default function SideBar() {
@@ -13,7 +13,7 @@ export default function SideBar() {
     gsap.to(e.target, { rotation: "50", yoyo: true, repeat: 1 });
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // context는 wrapper 역할
     let ctx = gsap.context(() => {
       tl.current = gsap
@@ -25,7 +25,7 @@ export default function SideBar() {
   }, [app]);
 
   return (
-    <div ref={app} className="z-10 ">
+    <div ref={app} className="z-10">
       <nav className="fixed top-0 left-0 h-screen p-8 text-lg opacity-0 nav">
         <ul className="flex flex-col justify-start gap-4 overflow-scroll">
           <li>
@@ -33,6 +33,15 @@ export default function SideBar() {
           </li>
           <li>
             <Link href="/sphere">Sphere</Link>
+          </li>
+          <li>
+            <Link href="/box">Box</Link>
+          </li>
+          <li>
+            <Link href="/cube">Cube</Link>
+          </li>
+          <li>
+            <Link href="/obj">Obj</Link>
           </li>
         </ul>
       </nav>
