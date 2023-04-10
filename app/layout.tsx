@@ -17,7 +17,7 @@ export default function RootLayout({
       <body className="flex text-white bg-gray-800">
         <Fonts>
           {/* 메인 영역 */}
-          {children}
+          <div className="w-screen h-screen">{children}</div>
 
           {/* 사이드바 */}
           <SideBar />
